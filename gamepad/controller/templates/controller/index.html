@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Gamepad API Test</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <style>
+            pre 
+            {
+                background: #555;
+                color: #5F5;
+                padding: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <pre id="gamepad-display"></pre>
+        <p id="demo"></p>
+        <script>
+            window.addEventListener('gamepadconnected' , event => {
+                console.log('Gamepad connected:')
+                console.log(event.gamepad)
+            })
+
+            window.addEventListener('gamepaddisconnected' , event => {
+                console.log('Gamepad disconnected:')
+                console.log(event.gamepad)
+            })
+
+            function update(){
+                const gamepads = navigator.getGamepads()
+                if (gamepads[0]){
+                    const gamepadState = {
+                        id: gamepads[0].id,
+
+                        axes: [
+                            gamepads[0].axes[0].toFixed(2),
+                            gamepads[0].axes[1].toFixed(2),
+                            gamepads[0].axes[2].toFixed(2),
+                            gamepads[0].axes[3].toFixed(2),
+                        ],
+                        
+                        buttons: [
+                            {button_0: gamepads[0].buttons[0].pressed},
+                            {button_1: gamepads[0].buttons[1].pressed},
+                            {button_2: gamepads[0].buttons[2].pressed},
+                            {button_3: gamepads[0].buttons[3].pressed},
+                            {button_4: gamepads[0].buttons[4].pressed},
+                            {button_5: gamepads[0].buttons[5].pressed},
+                            {button_6: gamepads[0].buttons[6].pressed},
+                            {button_7: gamepads[0].buttons[7].pressed},
+                            {button_8: gamepads[0].buttons[8].pressed},
+                            {button_9: gamepads[0].buttons[9].pressed},
+                            {button_10: gamepads[0].buttons[10].pressed},
+                            {button_11: gamepads[0].buttons[11].pressed},
+                            {button_12: gamepads[0].buttons[12].pressed},
+                            {button_13: gamepads[0].buttons[13].pressed},
+                            {button_14: gamepads[0].buttons[14].pressed},
+                            {button_15: gamepads[0].buttons[15].pressed},
+                        ]
+                    } 
+
+                    const myJSON = JSON.stringify(gamepadState,null,2);
+                    document.getElementById("gamepad-display").innerHTML = myJSON;
+                }
+                if (gamepads[0]) {
+                    if(gamepads[0].buttons[12].pressed==true){
+                        //call api khi nhan nut
+                        
+                    }
+                    if(gamepads[0].buttons[13].pressed==true){
+                        //call api khi nhan nut
+                    }
+                    if(gamepads[0].buttons[14].pressed==true){
+                       //call api khi nhan nut
+                    }
+                    if(gamepads[0].buttons[15].pressed==true){
+                       //call api khi nhan nut
+                    }
+                }
+                window.requestAnimationFrame(update)
+            }
+            window.requestAnimationFrame(update)
+            
+        </script>
+    </body>
+</html>
